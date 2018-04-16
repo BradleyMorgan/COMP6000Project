@@ -11,13 +11,12 @@
     // mysql database to work with your project. Go to,
     // Your project -> right click -> properties -> Libraries -> Compiler tab -> Add library -> select "MySQL JDBC Driver" library -> Ok
     Class.forName("com.mysql.jdbc.Driver"); //to connect mysql database
-    conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/demo", "root", "");  //connection with database.. demo: db name, username:root, password: " "
+    conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");  //connection with database.. demo: db name, username:root, password: " "
     st = conn.createStatement();
     st1 = conn.createStatement();
 
     //get parameter value by using the 'name' of the field
-    String firstname = request.getParameter("firstname");   
-    String lastname = request.getParameter("lastname");     
+    String email = request.getParameter("email");    
     String username = request.getParameter("username");     
     String password = request.getParameter("password");
 
@@ -31,12 +30,15 @@
     }
     else
     {
-        String sql = "INSERT INTO users (firstname, lastname, username, password) values ('"+firstname+"', '"+lastname+"', '"+username+"', '"+password+"')";   //query to enter values in database
+        String sql = "INSERT INTO users (username, password, email) values ('"+username+"', '"+password+"', '"+email+"')";   //query to enter values in database
+        
         st1.executeUpdate(sql);
         //create session: to keep track of user
         // we will check on home.jsp if this session was created or not.
         // if not user must login to go to home.jsp
         session.setAttribute("uname", username);          //session created... name: 'uname' and value: 'username' of the user    
+        
         response.sendRedirect("index.jsp");
+        
     }
 %>

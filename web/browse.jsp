@@ -17,7 +17,9 @@
     
     java.sql.Connection conn;
     java.sql.ResultSet rs;
+    java.sql.ResultSet vrs;
     java.sql.Statement st;
+    java.sql.Statement vst;
 
     Class.forName("com.mysql.jdbc.Driver");
     
@@ -39,17 +41,79 @@
                     
         }
         
-        query = "SELECT title, body, username, vote_count, posts.id FROM forum_posts JOIN posts ON posts.id = forum_posts.post_id JOIN users ON users.id = posts.user_id WHERE forum_posts.forum_id = "+forum_id+";";
-
+        query = "SELECT title, body, username, posts.id, v1.vote_count " +
+                "FROM forum_posts JOIN posts ON posts.id = forum_posts.post_id " +
+                "JOIN users ON users.id = posts.user_id " +
+                "LEFT JOIN (SELECT MAX(post_id) as post_id, SUM(vote) as vote_count FROM votes) v1 " +
+                "ON forum_posts.post_id = v1.post_id " + 
+                "WHERE forum_posts.forum_id ="+forum_id+";";
+        
         rs = st.executeQuery(query);
-
+        
         while(rs.next()) {
 
-            out.println("<div style='clear: left'>");
-            out.println("<div style='float: left;'><a href='vote?post_id="+rs.getString(5)+"&count=1'>&#x25B2;</a><br />"+rs.getString(4)+"<br /><a href='vote?post_id="+rs.getString(5)+"&count=-1'>&#x25BC;</a></div>");
-            out.println("<div style='float: left;'>" + rs.getString(1)+" by "+ rs.getString(3) + "<br />" + rs.getString(2) + "</div>");
-            out.println("<div>");
+            String up_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=1'>&#x25B2;</a>";
+            String down_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=-1'>&#x25BC;</a>";
+                    
+            if(session.getAttribute("uid") != null) {
+        
+                String v_query = "SELECT count(*), vote FROM votes WHERE user_id = " + session.getAttribute("uid").toString() + " AND post_id = " + rs.getString(4) + ";";
+                
+                out.println(v_query);
+                
+                vst = conn.createStatement();
+                vrs = vst.executeQuery(v_query);
+                
+                if(vrs.next()) {
+                
+                   if(vrs.getInt(1) > 0) {
+                   
+                        if(vrs.getInt(2) == 1) {
+                           up_arrow = "<a style='color: red;' href='vote?post_id=" + rs.getString(4) + "&count=-1&update=1'>&#x25B2;</a>";
+                        }
+                        
+                        if(vrs.getInt(2) == -1) {
+                            down_arrow = "<a style='color: red;' href='vote?post_id=" + rs.getString(4) + "&count=1&update=1'>&#x25BC;</a>";
+                        }
+                        
+                        if(vrs.getInt(2) == 0) {
+                            up_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=1&update=1'>&#x25B2;</a>";
+                            down_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=-1&update=1'>&#x25BC;</a>";
+                        }
+                        
+                        out.println("<div style='clear: left; overflow: auto;'>");
+                        out.println("<div style='float: left;'>" + up_arrow + "<br />" + rs.getInt(5) + "<br />" + down_arrow + "</div>");
+                        out.println("<div style='float: left;'>" + rs.getString(1)+" by "+ rs.getString(3) + "<br />" + rs.getString(2) + "</div>");
+                        out.println("</div>");
+                   
+                   } else {
+                       
+                        out.println("<div style='clear: left; overflow: auto;'>");
+                        out.println("<div style='float: left;'>" + up_arrow + "<br />" + rs.getInt(5) + "<br />" + down_arrow + "</div>");
+                        out.println("<div style='float: left;'>" + rs.getString(1)+" by "+ rs.getString(3) + "<br />" + rs.getString(2) + "</div>");
+                        out.println("</div>");
+                   }
+                    
+                } else {
+                    
+                    out.println("<div style='clear: left; overflow: auto;'>");
+                    out.println("<div style='float: left;'>" + up_arrow + "<br />" + rs.getInt(5) + "<br />" + down_arrow + "</div>");
+                    out.println("<div style='float: left;'>" + rs.getString(1)+" by "+ rs.getString(3) + "<br />" + rs.getString(2) + "</div>");
+                    out.println("</div>");
+                    
+                }
+                
+            } else {
+                    
+                out.println("<div style='clear: left; overflow: auto;'>");
+                out.println("<div style='float: left;'>&#x25B2;<br />"+rs.getInt(5)+"<br />&#x25BC;</div>");
+                out.println("<div style='float: left;'>" + rs.getString(1)+" by "+ rs.getString(3) + "<br />" + rs.getString(2) + "</div>");
+                out.println("</div>");
+
+            }
             
+            out.println("<hr />");
+
         }   
         
         out.println("<div style='clear: left;'><a href='post.jsp?forum_id="+forum_id+"'>Post</a></div>");

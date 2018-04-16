@@ -18,13 +18,16 @@
     String username = request.getParameter("username");     
     String password = request.getParameter("password");
 
-    String qr = "SELECT username FROM users WHERE username = '"+username+"' and password = '"+password+"'";    //query to select if the username already exists or not
+    String qr = "SELECT id, username FROM users WHERE username = '"+username+"' and password = '"+password+"'";    //query to select if the username already exists or not
     rs = st.executeQuery(qr);
     if(rs.next())                       
     {
         // if username or password is correct
-        session.setAttribute("uname", username);          //session created... name: 'uname' and value: 'username' of the user    
+        session.setAttribute("uname", rs.getString(2));          //session created... name: 'uname' and value: 'username' of the user    
+        session.setAttribute("uid", rs.getString(1));
+        
         response.sendRedirect("index.jsp");
+        
     }
     else
     {

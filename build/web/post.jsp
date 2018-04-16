@@ -15,7 +15,15 @@
         
         <h2>Post in </h2>
             <%
-             
+
+            if(session.getAttribute("uid") == null) {
+
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp?c");
+
+                rd.forward(request,response);
+
+            }
+                
             java.sql.Connection conn;
             java.sql.ResultSet rs;
             java.sql.Statement st;

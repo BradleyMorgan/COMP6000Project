@@ -8,110 +8,137 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>User Registration</title>
-    </head>
-    <body>
         
-        <%
+        <script type="text/javascript">
         
-        if(request.getParameter("submit") != null) {
-            
-            session.invalidate();
-            
-            java.sql.Connection conn;
-            java.sql.ResultSet rs;
-            java.sql.Statement st;
+            function validate() {
 
-            Class.forName("com.mysql.jdbc.Driver");
+                // javascript code to validate user input 
+                var str=true;
+                document.getElementById("msg").innerHTML="";                    
 
-            conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");
-                
-            String un = request.getParameter("un");
-            String pw = request.getParameter("pw");
-            String pwconf = request.getParameter("pwconf");
-            String email = request.getParameter("email");
-            
-            String query = "SELECT COUNT(*), users.* FROM users WHERE username = '" + un + "' and password = '" + pw + "' GROUP BY id;";
+                pwd = document.signupform.password.value;
+                cpwd = document.signupform.confirm.value;
 
-            //out.println(query);
-
-            st = conn.createStatement();
-            
-            rs = st.executeQuery(query);
-  
-            if(un.isEmpty() || pw.isEmpty() || email.isEmpty()) {
-                
-                out.println("<p>All fields are required.</p>");
-                
-            } else if(rs.next()) {
-                
-                out.println("<p>Error, user exists.</p>");
-            
-            } else if(!pwconf.equals(pw)) {
-                
-                out.println("<p>Error, passwords do not match.</p>");
-                
-            } else {
-            
-                st = conn.createStatement();
-
-                query = "INSERT INTO users (username, password, email) VALUES('"+un+"','"+pw+"','"+email+"');";
-
-                //out.println(query);
-                try {
-
-                    int resultCount = st.executeUpdate(query);
-
-                    if(resultCount == 0 || resultCount > 1) {
-                        
-                        out.println("<p>Error: unexpected result from user add.</p>");
-                        
-                    } else {
-                        
-                        RequestDispatcher rd = request.getRequestDispatcher("index.jsp?registered=1");
-                    
-                        rd.forward(request,response);
-                        
-                    }
-                    
-                } catch (Exception dbException) {
-
-                    out.println("<p>Error: update failed: " + dbException.getMessage() + "</p>");
+                if(pwd == cpwd) {
 
                 }
-                
-            }
-             
-        }
+                else {
+                    document.getElementById("msg").innerHTML="Password and confirm password must match!";
+                    str=false;
+                }
 
-        %>
+                if(document.signupform.password.value == '')
+                {
+                    document.getElementById("msg").innerHTML="Enter Password";
+                    str=false;
+                }
+
+                if(document.signupform.username.value == '')
+                {
+                    document.getElementById("msg").innerHTML="Enter Username";
+                    str=false;
+                }
+
+                lastname = document.signupform.lastname.value;
+                if(isNaN(lastname))
+                {
+                }
+                else
+                {
+                    document.getElementById("msg").innerHTML="Numbers are not allowed for last name!";
+                    str=false;
+                }
+
+                if(document.signupform.lastname.value == '')
+                {
+                    document.getElementById("msg").innerHTML="Enter Lastname";
+                    str=false;
+                }
+
+                firstname = document.signupform.firstname.value;
+                if(isNaN(firstname))
+                {
+                }
+                else
+                {
+                    document.getElementById("msg").innerHTML="Numbers are not allowed for first name!";
+                    str=false;
+                }
+
+                if(document.signupform.firstname.value == '')
+                {
+                    document.getElementById("msg").innerHTML="Enter Firstname";
+                    str=false;
+                } 
+
+                return str; 
+
+            }
         
-        </div>
+        </script>
         
-        <form action="user.jsp" method="POST">
+    </head>
+
+    <body>
+        
+        <form name="signupform" method="POST" action="signupprocess.jsp" onSubmit="return validate()">           <!-- On submit, the page will be redirected to signupprocess.jsp -->
+            
             <fieldset>
+                
                 <legend>User Registration</legend>
-                <p>
-                    <label for="un"><span>Username</span></label>
-                    <input type="text" name="un">
-                </p>
-                <p>
-                    <label for="un"><span>Email Address</span></label>
-                    <input type="text" name="email">
-                </p>
-                <p>
-                    <label for="pw"><span>Password</span></label>
-                    <input type="password" name="pw">
-                </p>
-                <p>
-                    <label for="pw"><span>Confirm</span></label>
-                    <input type="password" name="pwconf">
-                </p>
-                <span class="button">
-                    <input type="submit" name="submit" value="Register">
-                </span>
+            
+                <table>
+                
+                    <tr>
+                        <td>Username:</td>
+                        <td><input type="text" name="username" /></td>                  <!-- name: username -->
+                    </tr>
+                    <tr>
+                        <td>Email Address:</td>
+                        <td><input type="text" name="email" /></td>                 <!-- name: firstname -->
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input type="password" name="password" /></td>              <!-- name: password -->
+                    </tr>
+
+                    <tr>
+                        <td>Confirm Password:</td>
+                        <td><input type="password" name="confirm" /></td>               <!-- name: confirm -->
+                    </tr>
+
+                    <tr>
+                        <td><input type="submit" name="signup" value="Sign up" /></td>
+                        <td>
+                            <span id="msg"> </span>                                     <!-- span tag to print validation errors -->
+
+                            <%
+                                if(request.getParameter("a")!= null) {
+                                    //check the value for variable "a"
+                                    out.println("Username already exists..! Please login to continue.!");
+                                }
+
+                                if(request.getParameter("b")!= null) {
+                                    //check the value for variable "b"
+                                    out.println("You must login to continue.!");
+                                }
+                            %>
+
+                        </td>                      
+
+                    </tr>
+                
+                </table>
+                        
             </fieldset>
-        </form>      
+                    
+        </form>
+                       
     </body>
+    
 </html>

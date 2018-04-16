@@ -6,15 +6,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Creddit :: A COMP 6000 Web Application </title>
     </head>
+
     <body>
     
     <h1>Welcome to Creddit</h1>
-    
+    <div><a href="index.jsp">Home</a> | <a href="login.jsp">Login</a> | <a href="user.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
     <h3>Choose a Subcreddit</h3>
     
     <%
@@ -52,4 +55,5 @@
        
         
     </body>
+    
 </html>

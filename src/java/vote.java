@@ -5,7 +5,6 @@
  */
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -59,16 +59,36 @@ public class vote extends HttpServlet {
             
             if(request.getParameter("post_id") != null) {
            
+                HttpSession session = request.getSession();
+                
+                if(session.getAttribute("uid") == null) {
+           
+                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp?c");
+                    
+                    rd.forward(request,response);
+                    
+                }
+                
                 String post_id = request.getParameter("post_id");
                 String count = request.getParameter("count");
                 st = conn.createStatement();
 
-                String query = "UPDATE posts SET vote_count = vote_count + " + count + " WHERE id = " + post_id;
-           
-                st.executeUpdate(query);  
+                if(request.getParameter("update") != null) {
+                    
+                    String query = "UPDATE votes SET vote = vote + " + count + " WHERE post_id = " + post_id + " AND user_id = " + session.getAttribute("uid").toString() +";";
+
+                    st.executeUpdate(query);  
+                    
+                } else {
+                    
+                    String query = "INSERT INTO votes (user_id, post_id, vote) VALUES("+session.getAttribute("uid").toString()+","+post_id+","+count+");";
+
+                    st.executeUpdate(query);  
+                
+                }
                 
                 String dest = referer.substring(referer.lastIndexOf("/") + 1, referer.length());
-                
+
                 response.sendRedirect(dest);
             
             }
