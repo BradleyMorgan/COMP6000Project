@@ -12,6 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <h2>Post in </h2>
             <%
              
             java.sql.Connection conn;

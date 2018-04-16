@@ -9,11 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Creddit: A COMP 6000 Web Application </title>
+        <title>Creddit :: A COMP 6000 Web Application </title>
     </head>
     <body>
     
-            <%
+    <h1>Welcome to Creddit</h1>
+    
+    <h3>Choose a Subcreddit</h3>
+    
+    <%
     
     java.sql.Connection conn;
     java.sql.ResultSet rs;
