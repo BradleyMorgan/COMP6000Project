@@ -22,6 +22,8 @@
     
             conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");
             
+            String forum_id = request.getParameter("forum_id");
+                   
             if(request.getParameter("post_submit") != null) {
            
             st = conn.createStatement();
@@ -33,19 +35,25 @@
             
             String query = "INSERT INTO posts (user_id, title, body) VALUES('"+user_id+"','"+title+"','"+body+"');";
 
-            //out.println(query);
+            out.println(query);
             
             st.executeUpdate(query);
 
-            query = "INSERT INTO forum_posts (forum_id, post_id) VALUES ('"+forum_id+"','"+post_id"')";
-        }
-
+            query = "INSERT INTO forum_posts (forum_id, post_id) VALUES ('"+forum_id+"',LAST_INSERT_ID());";
+            
+            out.println(query);
+            
+            st.executeUpdate(query);
+            
+            }
 
             %>
+            
             <form action="post.jsp" method="POST">
             <fieldset>
                 
                 <legend>Post</legend>
+                <input type='hidden' name='forum_id' value='<% out.println(forum_id); %>'>
                 
                 <p>
                     <label for="title"><span>Title</span></label>

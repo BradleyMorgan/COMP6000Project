@@ -28,7 +28,7 @@
         st = conn.createStatement();
 
         String forum_id = request.getParameter("forum_id");
-        String query = "SELECT * FROM forum_posts WHERE forum_id = "+forum_id+";";
+        String query = "SELECT title, body, username FROM forum_posts JOIN posts ON posts.id = forum_posts.post_id JOIN users ON users.id = posts.user_id WHERE forum_posts.forum_id = "+forum_id+";";
 
         //out.println(query);
 
@@ -36,8 +36,11 @@
 
         while(rs.next()) {
 
-            out.println(rs.getString(4)+"<br />");
-        }
+            out.println(rs.getString(1)+" by "+ rs.getString(3) + "<br />" + rs.getString(2) + "<hr />");
+        
+        }   
+        
+        out.println("<a href='post.jsp?forum_id="+forum_id+"'>Post</a>");
 
     } catch (Exception dbException) {
 
