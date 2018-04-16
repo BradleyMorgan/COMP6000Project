@@ -12,6 +12,40 @@
         <title>Creddit: A COMP 6000 Web Application </title>
     </head>
     <body>
+    
+            <%
+    
+    java.sql.Connection conn;
+    java.sql.ResultSet rs;
+    java.sql.Statement st;
+
+    Class.forName("com.mysql.jdbc.Driver");
+    
+    conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");
+
+    try {
+
+        st = conn.createStatement();
+
+        String query = "SELECT * FROM forums;";
+
+        //out.println(query);
+
+        rs = st.executeQuery(query);
+
+        while(rs.next()) {
+
+            out.println("<a href='browse.jsp?forum_id="+rs.getString(1)+"'>"+rs.getString(2)+"</a><br />");
+        }
+
+    } catch (Exception dbException) {
+
+        out.println("SQL Error: " + dbException.getMessage());
+
+    }
+
+    %>
+       
         
     </body>
 </html>
