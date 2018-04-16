@@ -12,6 +12,41 @@
         <title>Forum Posts</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        
+                    <%
+    
+    java.sql.Connection conn;
+    java.sql.ResultSet rs;
+    java.sql.Statement st;
+
+    Class.forName("com.mysql.jdbc.Driver");
+    
+    conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");
+
+    try {
+
+        st = conn.createStatement();
+
+        String forum_id = request.getParameter("forum_id");
+        String query = "SELECT * FROM forum_posts WHERE forum_id = "+forum_id+";";
+
+        //out.println(query);
+
+        rs = st.executeQuery(query);
+
+        while(rs.next()) {
+
+            out.println(rs.getString(4)+"<br />");
+        }
+
+    } catch (Exception dbException) {
+
+        out.println("SQL Error: " + dbException.getMessage());
+
+    }
+
+    %>
+       
+    
     </body>
 </html>

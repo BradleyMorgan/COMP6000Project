@@ -26,19 +26,23 @@
            
             st = conn.createStatement();
 
-            String author_id = session.getAttribute("userId");
-
-            String query = "INSERT INTO posts (user_id, title, ) VALUES('"+topic_id+"','"+book_name+"','"+author_id+"','"+book_avail+"');";
+            //String user_id = session.getAttribute("userId").toString();
+            String user_id = "1";
+            String title = request.getParameter("title");
+            String body = request.getParameter("body");
+            
+            String query = "INSERT INTO posts (user_id, title, body) VALUES('"+user_id+"','"+title+"','"+body+"');";
 
             //out.println(query);
             
             st.executeUpdate(query);
 
+            query = "INSERT INTO forum_posts (forum_id, post_id) VALUES ('"+forum_id+"','"+post_id"')";
         }
 
 
             %>
-            <form action="db.jsp" method="POST">
+            <form action="post.jsp" method="POST">
             <fieldset>
                 
                 <legend>Post</legend>
