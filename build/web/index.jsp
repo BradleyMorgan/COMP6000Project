@@ -16,8 +16,24 @@
 
     <body>
     
-    <h1>Welcome to Creddit</h1>
+    <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
     <div><a href="index.jsp">Home</a> | <a href="login.jsp">Login</a> | <a href="user.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
+    
+    <%            
+        
+        if(session.getAttribute("uid") != null) {
+
+            out.println("<h2>Welcome to Creddit, " + session.getAttribute("uname").toString() + "</h2>");
+
+        } else {
+            
+            out.println("<h2>Welcome to Creddit</h2>");
+            
+        }
+
+    %>
+    
+    
     <h3>Choose a Subcreddit</h3>
     
     <%
@@ -40,9 +56,19 @@
 
         rs = st.executeQuery(query);
 
-        while(rs.next()) {
+        if(!rs.next()) {
+        
+            out.println("<h4>No Subcreddits Available</h4>");
+            
+        } else {
+        
+            rs.beforeFirst();
+            
+            while(rs.next()) {
 
-            out.println("<a href='browse.jsp?forum_id="+rs.getString(1)+"'>"+rs.getString(2)+"</a><br />");
+                out.println("<a href='browse.jsp?forum_id="+rs.getString(1)+"'>"+rs.getString(2)+"</a><br />");
+            }
+            
         }
 
     } catch (Exception dbException) {

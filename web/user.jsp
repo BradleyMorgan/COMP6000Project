@@ -86,6 +86,10 @@
 
     <body>
         
+        <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
+        <div><a href="index.jsp">Home</a> | <a href="login.jsp">Login</a> | <a href="user.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
+        <h2>User Registration</h2>
+        
         <form name="signupform" method="POST" action="signupprocess.jsp" onSubmit="return validate()">           <!-- On submit, the page will be redirected to signupprocess.jsp -->
             
             <fieldset>

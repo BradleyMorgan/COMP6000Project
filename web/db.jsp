@@ -8,8 +8,17 @@
 <!DOCTYPE html>
 <html>
     
+    
     <%
     
+    if(session.getAttribute("uid") == null) {
+
+        RequestDispatcher rd = request.getRequestDispatcher("login.jsp?c");
+
+        rd.forward(request,response);
+
+    }
+                             
     java.sql.Connection conn;
     java.sql.ResultSet rs;
     java.sql.Statement st;
@@ -43,6 +52,10 @@
     
     <body>
     
+        <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
+        <div><a href="index.jsp">Home</a> | <a href="login.jsp">Login</a> | <a href="user.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
+        <h2>Create New Subcreddit</h2>
+        
         <form action="db.jsp" method="POST">
             <fieldset>
                 

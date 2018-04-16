@@ -13,7 +13,10 @@
     </head>
     <body>
         
-        <h2>Post in </h2>
+        <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
+        <div><a href="index.jsp">Home</a> | <a href="login.jsp">Login</a> | <a href="user.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
+        <h2>Post a Message</h2>
+        
             <%
 
             if(session.getAttribute("uid") == null) {
@@ -38,22 +41,21 @@
            
             st = conn.createStatement();
 
-            //String user_id = session.getAttribute("userId").toString();
-            String user_id = "1";
+            String user_id = session.getAttribute("uid").toString();
             String title = request.getParameter("title");
             String body = request.getParameter("body");
             
             String query = "INSERT INTO posts (user_id, title, body) VALUES('"+user_id+"','"+title+"','"+body+"');";
 
-            out.println(query);
-            
             st.executeUpdate(query);
 
             query = "INSERT INTO forum_posts (forum_id, post_id) VALUES ('"+forum_id+"',LAST_INSERT_ID());";
             
-            out.println(query);
-            
             st.executeUpdate(query);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("browse.jsp?forum_id=" + forum_id);
+
+            rd.forward(request,response);
             
             }
 
@@ -72,9 +74,8 @@
                 
                 <p>
                     <label for="body"><span>Body</span></label>
-                    <input type="text" name="body">
+                    <textarea name="body" cols="60" rows="12" ></textarea>
                 </p>          
-                
                 
                 <span class="button">
                     <input type="submit" name="post_submit" value="Submit Post">

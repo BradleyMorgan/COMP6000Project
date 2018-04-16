@@ -38,7 +38,7 @@
         // if not user must login to go to home.jsp
         session.setAttribute("uname", username);          //session created... name: 'uname' and value: 'username' of the user    
         
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("login.jsp?newuser");
         
     }
 %>

@@ -21,8 +21,19 @@
     
     <body>
 
-        <h1>Creddit Login</h1>
+        <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
         <div><a href="index.jsp">Home</a> | <a href="login.jsp">Login</a> | <a href="user.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
+        <h2>Creddit Login</h2>
+        
+        <%
+        
+        if(request.getParameter("newuser")!= null) {
+            
+            out.println("<p>Registration successful.  Please log in...</p>");
+            
+        }
+
+        %>
         
         <div>
             
@@ -50,7 +61,7 @@
                                 <%
                                     if(request.getParameter("c")!= null) {
                                         //check the value for variable "c"
-                                        out.println("Username or password is incorrect.!");
+                                        out.println("Username or password is incorrect!");
                                     }
                                 %>
                             </td>
