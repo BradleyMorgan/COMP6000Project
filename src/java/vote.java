@@ -35,6 +35,8 @@ public class vote extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         
+        String referer = request.getHeader("Referer");
+        
             java.sql.Connection conn;
             java.sql.ResultSet rs;
             java.sql.Statement st;
@@ -45,7 +47,7 @@ public class vote extends HttpServlet {
             
             } catch (ClassNotFoundException ex) {
             
-                RequestDispatcher rd = request.getRequestDispatcher("index.jsp?err=1");
+                RequestDispatcher rd = request.getRequestDispatcher("browse.jsp?err=1");
                     
                 rd.forward(request,response);
             
@@ -65,9 +67,9 @@ public class vote extends HttpServlet {
            
                 st.executeUpdate(query);  
                 
-                RequestDispatcher rd = request.getRequestDispatcher("browse.jsp?err=2");
-                    
-                rd.forward(request,response);
+                String dest = referer.substring(referer.lastIndexOf("/") + 1, referer.length());
+                
+                response.sendRedirect(dest);
             
             }
             

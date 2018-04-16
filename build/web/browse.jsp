@@ -46,7 +46,7 @@
         while(rs.next()) {
 
             out.println("<div style='clear: left'>");
-            out.println("<div style='float: left;'><a href='vote?post_id="+rs.getString(5)+"&count=1'>&#x25B2;</a><br />"+rs.getString(4)+"<br /><a href='vote?post_id="+rs.getString(5)+"&count=1'>&#x25BC;</a></div>");
+            out.println("<div style='float: left;'><a href='vote?post_id="+rs.getString(5)+"&count=1'>&#x25B2;</a><br />"+rs.getString(4)+"<br /><a href='vote?post_id="+rs.getString(5)+"&count=-1'>&#x25BC;</a></div>");
             out.println("<div style='float: left;'>" + rs.getString(1)+" by "+ rs.getString(3) + "<br />" + rs.getString(2) + "</div>");
             out.println("<div>");
             
