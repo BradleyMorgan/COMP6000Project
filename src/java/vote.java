@@ -87,9 +87,7 @@ public class vote extends HttpServlet {
                 
                 }
                 
-                String dest = referer.substring(referer.lastIndexOf("/") + 1, referer.length());
-
-                response.sendRedirect(dest);
+                response.sendRedirect("browse.jsp");
             
             }
             

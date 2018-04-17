@@ -34,13 +34,24 @@
     {
         String sql = "INSERT INTO users (username, password, email) values ('"+username+"', '"+password+"', '"+email+"')";   //query to enter values in database
         
-        int id = st1.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+        java.sql.PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        
+        //int id = st1.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 
+        pstmt.executeUpdate();
+        
+        java.sql.ResultSet keyset = pstmt.getGeneratedKeys();
+        
         //create session: to keep track of user
         // we will check on home.jsp if this session was created or not.
         // if not user must login to go to home.jsp
         session.setAttribute("uname", username);          //session created... name: 'uname' and value: 'username' of the user    
-        session.setAttribute("uid", id);
+        
+        if(keyset.next()) {
+            
+            session.setAttribute("uid", keyset.getInt(1));
+        
+        }
         
         
         response.sendRedirect("index.jsp");
