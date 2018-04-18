@@ -53,7 +53,7 @@
     <body>
     
         <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
-        <div><a href="index.jsp">Home</a> | <a href="login.jsp">Login</a> | <a href="user.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
+        <div><a href="index.jsp">Home</a> | <%=(session.getAttribute("uid") != null ? "<a href='logout.jsp'>Log Out</a>" : "<a href='login.jsp'>Log In</a>")%> | <a href="user.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
         <h2>Create New Subcreddit</h2>
         
         <form action="db.jsp" method="POST">
