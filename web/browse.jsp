@@ -67,8 +67,8 @@
 
             while(rs.next()) {
 
-                String up_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=1'>&#x25B2;</a>";
-                String down_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=-1'>&#x25BC;</a>";
+                String up_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id+"&count=1'>&#x25B2;</a>";
+                String down_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id+"&count=-1'>&#x25BC;</a>";
 
                 if(session.getAttribute("uid") != null) {
 
@@ -84,18 +84,18 @@
                             if(vrs.getInt(2) == 1) {
                                //up_arrow = "<a style='color: red;' href='vote?post_id=" + rs.getString(4) + "&count=-1&update=1'>&#x25B2;</a>";
                                up_arrow = "<span style='color: red'>&#x25B2</span>";
-                               down_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=-1&update=1'>&#x25BC;</a>";
+                               down_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id + "&count=-1&update=1'>&#x25BC;</a>";
                             }
 
                             if(vrs.getInt(2) == -1) {
-                                up_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=1&update=1'>&#x25B2;</a>";
+                                up_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id + "&count=1&update=1'>&#x25B2;</a>";
                                 //down_arrow = "<a style='color: red;' href='vote?post_id=" + rs.getString(4) + "&count=1&update=1'>&#x25BC;</a>";
                                 down_arrow = "<span style='color: red'>&#x25BC;</span>";
                             }
 
                             if(vrs.getInt(2) == 0) {
-                                up_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=1&update=1'>&#x25B2;</a>";
-                                down_arrow = "<a href='vote?post_id=" + rs.getString(4) + "&count=-1&update=1'>&#x25BC;</a>";
+                                up_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id + "&count=1&update=1'>&#x25B2;</a>";
+                                down_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id + "&count=-1&update=1'>&#x25BC;</a>";
                             }
 
                             out.println("<div style='clear: left; overflow: auto;'>");

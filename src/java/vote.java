@@ -70,6 +70,7 @@ public class vote extends HttpServlet {
                 }
                 
                 String post_id = request.getParameter("post_id");
+                String forum_id = request.getParameter("forum_id");
                 String count = request.getParameter("count");
                 st = conn.createStatement();
 
@@ -87,13 +88,15 @@ public class vote extends HttpServlet {
                 
                 }
                 
-                response.sendRedirect("browse.jsp");
+                response.sendRedirect("browse.jsp?forum_id="+forum_id);
             
             }
             
             } catch (SQLException dbException) {
 
-                RequestDispatcher rd = request.getRequestDispatcher("browse.jsp?err=2");
+                String forum_id = request.getParameter("forum_id");
+                
+                RequestDispatcher rd = request.getRequestDispatcher("browse.jsp?err=2&forum_id="+forum_id);
                     
                 rd.forward(request,response);
 
