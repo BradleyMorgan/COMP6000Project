@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,9 +40,17 @@ public class genreport extends HttpServlet {
 
         try (PrintWriter out = response.getWriter()) {
  
-            out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            String context = this.getServletContext().getRealPath("/");
+            String strPath = context + "../../xml/users.xml";
+            File strFile = new File(strPath);
+            boolean fileCreated = strFile.createNewFile();
+                
+            Writer objWriter = new BufferedWriter(new FileWriter(strFile));
+            objWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            objWriter.write("<u:users xmlns:t=\"http://creddit.biz/users\">\n");
             
-            out.println("<u:users xmlns:t=\"http://creddit.biz/users\">");
+            //out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            //out.println("<u:users xmlns:t=\"http://creddit.biz/users\">");
             
             try {
 
@@ -63,18 +70,23 @@ public class genreport extends HttpServlet {
 
                 st = conn.createStatement();
 
-                String query = "SELECT * FROM users, (SELECT user_id, COUNT(*) AS post_count FROM posts GROUP BY user_id) AS pc WHERE users.id = pc.user_id;";                    
+                String query = "SELECT users.id, username, email, COALESCE(post_count, 0), COALESCE(upvote_count, 0), COALESCE(downvote_count, 0), timestamp FROM users " 
+                        + "LEFT JOIN (SELECT user_id, COUNT(*) AS post_count FROM posts GROUP BY user_id) AS pc ON users.id = pc.user_id "
+                        + "LEFT JOIN (SELECT user_id, COUNT(*) AS upvote_count FROM votes WHERE vote=1 GROUP BY user_id) AS upvotes ON users.id = upvotes.user_id "
+                        + "LEFT JOIN (SELECT user_id, COUNT(*) AS downvote_count FROM votes WHERE vote=-1 GROUP BY user_id) AS downvotes ON users.id = downvotes.user_id";                   
 
                 rs = st.executeQuery(query);
 
                 while(rs.next()) {
 
-                    out.println("\t<u:user id='"+rs.getString(1)+"'>");
-                    out.println("\t\t<username>"+rs.getString(2)+"</username>");
-                    out.println("\t\t<email>"+rs.getString(4)+"</username>");
-                    out.println("\t\t<postcount>"+rs.getString(7)+"</username>");
-                    out.println("\t\t<ctime>"+rs.getString(5)+"</username>");
-                    out.println("\t</u:user>");
+                    objWriter.write("\t<u:user id='"+rs.getString(1)+"'>\n");
+                    objWriter.write("\t\t<username>"+rs.getString(2)+"</username>\n");
+                    objWriter.write("\t\t<email>"+rs.getString(4)+"</email>\n");
+                    objWriter.write("\t\t<postcount>"+rs.getString(7)+"</postcount>\n");
+                    objWriter.write("\t\t<upvotes>"+rs.getString(5)+"</upvotes>\n");
+                    objWriter.write("\t\t<downvotes>"+rs.getString(6)+"</downvotes>\n");
+                    objWriter.write("\t\t<ctime>"+rs.getString(7)+"</ctime>\n");
+                    objWriter.write("\t</u:user>\n");
 
                 }
             
@@ -88,10 +100,18 @@ public class genreport extends HttpServlet {
 
             }
             
-            out.println("</u:users>");
+            objWriter.write("</u:users>");
+        
+            objWriter.flush();
+            objWriter.close();
+            
+            out.println("Report XML generated and saved to " + strFile);
+        
+        } catch(Exception ex) {
+            
+            System.out.println("Error: " + ex.getLocalizedMessage());
             
         }
-            
         
     }
 
