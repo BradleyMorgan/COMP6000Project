@@ -4,9 +4,17 @@
         <servlet-name>loginValidation</servlet-name>
         <servlet-class>loginValidation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginValidation</servlet-name>
         <url-pattern>/loginValidation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
