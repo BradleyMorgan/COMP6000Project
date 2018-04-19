@@ -86,7 +86,7 @@
                     
                     <tr>
                         <td>Email:</td>
-                        <td><input type="text" name="firstname"  /></td>                 <!-- name: firstname -->
+                        <td><input type="text" name="email"  /></td>                 <!-- name: email -->
                     </tr>
                     <tr>
                         <td>Username:</td>
