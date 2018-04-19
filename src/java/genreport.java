@@ -41,13 +41,13 @@ public class genreport extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
  
             String context = this.getServletContext().getRealPath("/");
-            String strPath = context + "../../xml/users.xml";
+            String strPath = context + "./xml/users.xml";
             File strFile = new File(strPath);
             boolean fileCreated = strFile.createNewFile();
                 
             Writer objWriter = new BufferedWriter(new FileWriter(strFile));
             objWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-            objWriter.write("<u:users xmlns:t=\"http://creddit.biz/users\">\n");
+            objWriter.write("<users xmlns:t=\"http://creddit.biz/users\">\n");
             
             //out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             //out.println("<u:users xmlns:t=\"http://creddit.biz/users\">");
@@ -79,14 +79,14 @@ public class genreport extends HttpServlet {
 
                 while(rs.next()) {
 
-                    objWriter.write("\t<u:user id='"+rs.getString(1)+"'>\n");
+                    objWriter.write("\t<user id='"+rs.getString(1)+"'>\n");
                     objWriter.write("\t\t<username>"+rs.getString(2)+"</username>\n");
-                    objWriter.write("\t\t<email>"+rs.getString(4)+"</email>\n");
-                    objWriter.write("\t\t<postcount>"+rs.getString(7)+"</postcount>\n");
+                    objWriter.write("\t\t<email>"+rs.getString(3)+"</email>\n");
+                    objWriter.write("\t\t<postcount>"+rs.getString(4)+"</postcount>\n");
                     objWriter.write("\t\t<upvotes>"+rs.getString(5)+"</upvotes>\n");
                     objWriter.write("\t\t<downvotes>"+rs.getString(6)+"</downvotes>\n");
                     objWriter.write("\t\t<ctime>"+rs.getString(7)+"</ctime>\n");
-                    objWriter.write("\t</u:user>\n");
+                    objWriter.write("\t</user>\n");
 
                 }
             
@@ -100,12 +100,13 @@ public class genreport extends HttpServlet {
 
             }
             
-            objWriter.write("</u:users>");
+            objWriter.write("</users>");
         
             objWriter.flush();
             objWriter.close();
             
-            out.println("Report XML generated and saved to " + strFile);
+            response.sendRedirect("report.jsp?complete=1");
+            
         
         } catch(Exception ex) {
             
