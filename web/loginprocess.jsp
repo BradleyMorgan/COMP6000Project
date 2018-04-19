@@ -23,10 +23,10 @@
     if(rs.next())                       
     {
         // if username or password is correct
-        session.setAttribute("uname", rs.getString(2));          //session created... name: 'uname' and value: 'username' of the user    
-        session.setAttribute("uid", rs.getString(1));
-        
-        response.sendRedirect("index.jsp");
+        //session.setAttribute("uname", rs.getString(2));          //session created... name: 'uname' and value: 'username' of the user    
+        //session.setAttribute("uid", rs.getString(1));
+        //response.sendRedirect("index.jsp");
+        response.sendRedirect("loginValidation?username="+username+""); 
         
     }
     else
