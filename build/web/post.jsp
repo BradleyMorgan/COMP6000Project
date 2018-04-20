@@ -16,17 +16,12 @@
         <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
         <div><a href="index.jsp">Home</a> | <%=(session.getAttribute("uid") != null ? "<a href='logout'>Log Out</a>" : "<a href='login.jsp'>Log In</a>")%> | <a href="register.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
         <h2>Post a Message</h2>
+        <c:if test = "${username == null}">
+            <c:redirect url="login.jsp?c"/>
+        </c:if>
         
-            <%
 
-            if(session.getAttribute("uid") == null) {
-
-                RequestDispatcher rd = request.getRequestDispatcher("login.jsp?c");
-
-                rd.forward(request,response);
-
-            }
-                
+            <%    
             java.sql.Connection conn;
             java.sql.ResultSet rs;
             java.sql.Statement st;

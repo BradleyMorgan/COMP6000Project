@@ -6,6 +6,7 @@
 <%@page import="com.mysql.jdbc.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.mysql.jdbc.PreparedStatement"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 

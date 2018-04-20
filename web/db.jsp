@@ -5,74 +5,54 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%-- Added for JSTL SQL queries --%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>  
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
+
+
 <!DOCTYPE html>
 <html>
+    <c:if test = "${sessionScope.uname == null}">
+        <c:redirect url="login.jsp?c"/>
+    </c:if>
     
+    <sql:setDataSource var = "creddit_db" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/comp6000"
+         user = "comp6000"  password = "comp6000"/>
     
-    <%
-    
-    if(session.getAttribute("uid") == null) {
-
-        RequestDispatcher rd = request.getRequestDispatcher("login.jsp?c");
-
-        rd.forward(request,response);
-
-    }
-                             
-    java.sql.Connection conn;
-    java.sql.ResultSet rs;
-    java.sql.Statement st;
-
-    Class.forName("com.mysql.jdbc.Driver");
-    
-    conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");
-    
-    if(request.getParameter("forum_submit") != null) {
-
-        st = conn.createStatement();
-
-        String name = request.getParameter("name");
-
-        String query = "INSERT INTO forums (name) VALUES('"+name+"');";
-
-        out.println(query);
-
-        st.executeUpdate(query);
-
-    }
-        
-    %>
-    
-    <head>
-    
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Test</title>
-    
-    </head>
-    
-    <body>
-    
-        <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
-        <div><a href="index.jsp">Home</a> | <%=(session.getAttribute("uid") != null ? "<a href='logout.jsp'>Log Out</a>" : "<a href='login.jsp'>Log In</a>")%> | <a href="register.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
-        <h2>Create New Subcreddit</h2>
-        
-        <form action="db.jsp" method="POST">
-            <fieldset>
-                
-                <legend>Add New Forum \ Subcreddit</legend>
-                
-                <p>
-                    <label for="topic"><span>Name</span></label>
-                    <input type="text" name="name">
-                </p>          
-                
-                <span class="button">
-                    <input type="submit" name="forum_submit" value="Add Forum">
-                </span>
-
-            </fieldset>
-        </form>     
-        
-    </body>
-    
+    <c:if test="${param.forum_submit != null}">
+        <sql:update dataSource = "${creddit_db}" var = "result">
+         INSERT INTO forums (name) VALUES("${param.name}");
+      </sql:update>
+    </c:if>
+         
+         <head>
+             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+             <title>Add a Subcreddit</title>
+         </head>
+         <body>
+             <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
+             <div><a href="index.jsp">Home</a> | ${sessionScope.uname != null ? "<a href='logout'>Log Out</a>" : "<a href='login.jsp'>Log In</a>"} | <a href="register.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
+             <h2>Create New Subcreddit</h2>
+             
+             <form action="db.jsp" method="POST">
+                 <fieldset>
+                     <legend>Add New Forum \ Subcreddit</legend>
+                     
+                     <p>
+                         <label for="topic"><span>Name</span></label>
+                         <input type="text" name="name">
+                     </p>
+                     
+                     <span class="button">
+                         <input type="submit" name="forum_submit" value="Add Forum">
+                     </span>
+                 
+                 </fieldset>
+             </form>
+         </body>
 </html>
