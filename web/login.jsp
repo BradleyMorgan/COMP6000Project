@@ -23,7 +23,7 @@
     <body>
 
         <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
-        <div><a href="index.jsp">Home</a> | <%=(session.getAttribute("uid") != null ? "<a href='logout.jsp'>Log Out</a>" : "<a href='login.jsp'>Log In</a>")%> | <a href="register.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a></div>
+        <div><a href="index.jsp">Home</a> | <%=(session.getAttribute("uid") != null ? "<a href='logout'>Log Out</a>" : "<a href='login.jsp'>Log In</a>")%> | <a href="register.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a> | <a href="report.jsp">Reports</a></div>
         <h2>Creddit Login</h2>
         
         <%
