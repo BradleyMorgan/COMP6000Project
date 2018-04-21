@@ -26,7 +26,7 @@
     if(rs.next())                       
     {
         // lets say "a" is for "user already exists" // passing variable "a" with URL
-        response.sendRedirect("index.jsp?a");                                    // if username found in database, redirect user to index.jsp with some error
+        response.sendRedirect("register.jsp?a");                                    // if username found in database, redirect user to index.jsp with some error
     }
     else
     {

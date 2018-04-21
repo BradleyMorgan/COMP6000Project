@@ -76,9 +76,7 @@
                     document.getElementById("msg").innerHTML="Enter Firstname";
                     str=false;
                 } 
-
                 return str; 
-
             }
         
         </script>
@@ -116,10 +114,6 @@
                             
                             <c:if test="${param.a != null}">
                                 Username already exists.
-                            </c:if>
-                            
-                            <c:if test="${param.b != null}">
-                                You must login to continue.
                             </c:if>
                             
                             
