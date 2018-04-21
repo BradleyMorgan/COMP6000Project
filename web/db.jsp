@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%-- Added for JSTL SQL queries --%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>  
@@ -35,8 +35,7 @@
              <title>Add a Subcreddit</title>
          </head>
          <body>
-             <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
-             <div><a href="index.jsp">Home</a> | ${sessionScope.uname != null ? "<a href='logout'>Log Out</a>" : "<a href='login.jsp'>Log In</a>"} | <a href="register.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a> | <a href="report.jsp">Reports</a></div>
+             <jsp:include page="/header.jsp" />
              <h2>Create New Subcreddit</h2>
              
              <form action="db.jsp" method="POST">
