@@ -20,7 +20,7 @@
     
     java.sql.Connection conn;
     java.sql.ResultSet rs;
-    java.sql.ResultSet vrs;
+    java.sql.ResultSet vrs;     
     java.sql.Statement st;
     java.sql.Statement vst;
 
