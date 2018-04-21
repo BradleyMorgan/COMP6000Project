@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
     <c:if test = "${sessionScope.uname == null}">
-        <c:redirect url="login.jsp?c"/>
+        <c:redirect url="login.jsp?b"/>
     </c:if>
     
     <sql:setDataSource var = "creddit_db" driver = "com.mysql.jdbc.Driver"

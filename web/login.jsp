@@ -38,6 +38,9 @@
                                 <c:if test="${param.c != null}">
                                     Username or password is incorrect.
                                 </c:if>
+                                <c:if test="${param.b != null}">
+                                    You must login to continue.
+                                </c:if>
                             </td>
                         </tr>
                     </table>        

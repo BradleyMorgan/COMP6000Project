@@ -5,13 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
-        <title>User Registration</title>
+        <title>Creddit User Registration</title>
         
         <script type="text/javascript">
         
@@ -81,19 +82,15 @@
             }
         
         </script>
-        
     </head>
 
     <body>
         <jsp:include page="/header.jsp"/>
-        <h2>User Registration</h2>
+        <h2>Creddit User Registration</h2>
         
-        <form name="signupform" method="POST" action="registrationProcess.jsp" onSubmit="return validate()">           <!-- On submit, the page will be redirected to signupprocess.jsp -->
-            
+        <form name="signupform" method="POST" action="registrationProcess.jsp" onSubmit="return validate()">
             <fieldset>
-                
                 <legend>User Registration</legend>
-            
                 <table>
                 
                     <tr>
@@ -108,17 +105,25 @@
                         <td>Password:</td>
                         <td><input type="password" name="password" /></td>              <!-- name: password -->
                     </tr>
-
                     <tr>
                         <td>Confirm Password:</td>
                         <td><input type="password" name="confirm" /></td>               <!-- name: confirm -->
                     </tr>
-
                     <tr>
                         <td><input type="submit" name="signup" value="Sign up" /></td>
                         <td>
-                            <span id="msg"> </span>                                     <!-- span tag to print validation errors -->
-
+                            <span id="msg"> </span>
+                            
+                            <c:if test="${param.a != null}">
+                                Username already exists.
+                            </c:if>
+                            
+                            <c:if test="${param.b != null}">
+                                You must login to continue.
+                            </c:if>
+                            
+                            
+                            <%--
                             <%
                                 if(request.getParameter("a")!= null) {
                                     //check the value for variable "a"
@@ -130,17 +135,12 @@
                                     out.println("You must login to continue.!");
                                 }
                             %>
+                            --%>
 
                         </td>                      
-
                     </tr>
-                
                 </table>
-                        
-            </fieldset>
-                    
-        </form>
-                       
+            </fieldset>         
+        </form>               
     </body>
-    
 </html>

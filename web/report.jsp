@@ -38,10 +38,8 @@
         <input type="submit" name="submit" value="Generate Report">
         
     </form>
-
     
     </body>
-
 </html>
 
 <% } %>
