@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,14 +50,11 @@ public class loginValidation extends HttpServlet {
                 {
                     conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");
                     st = conn.createStatement();
-                    
-                    //String username = request.getParameter("username");
+
                     String sessionSetting = "SELECT id, username FROM users WHERE username = '"+request.getParameter("username")+"'"; 
                     rs = st.executeQuery(sessionSetting);
                     if(rs.next())
                     {
-                        //String nameofuser = rs.getString("username");
-                        //String numberofuser = rs.getString("id");
                         session.setAttribute("uname", rs.getString("username"));          //session created... name: 'uname' and value: 'username' of the user    
                         session.setAttribute("uid", rs.getString("id"));
                        

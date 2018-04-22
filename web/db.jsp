@@ -27,7 +27,7 @@
     <c:if test="${param.forum_submit != null}">
         <sql:update dataSource = "${creddit_db}" var = "result">
          INSERT INTO forums (name) VALUES("${param.name}");
-      </sql:update>
+        </sql:update>
     </c:if>
          
          <head>

@@ -89,6 +89,8 @@ public class voteOutput extends HttpServlet {
 
             String forum_id = request.getParameter("forum_id");
             
+            String test = "test";
+            
             out.println("<h2>Posts in " + forum_name + "</h2>");
             
             if (!rs.next()) {
@@ -164,7 +166,7 @@ public class voteOutput extends HttpServlet {
 
             }
 
-            out.println("<div style='clear: left;'><a href='post.jsp?forum_id="+forum_id+"'>Post</a></div>");
+            out.println("<div style='clear: left;'><a href='post.jsp?forum_id=" + forum_id + "'>Post</a></div>");
 
         } catch (Exception dbException) {
 

@@ -32,15 +32,13 @@ public class logout extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession();
-        if(session.getAttribute("uid") != null) {             
-		//if session was created
+        if(session.getAttribute("uid") != null)
+        {             
 		session.invalidate();
 		response.sendRedirect("index.jsp");
         }
 	else
 	{
-            // passing variable "b" with URL
-            // lets say "b" is for "user must login"
             response.sendRedirect("index.jsp?b");
         }
     }

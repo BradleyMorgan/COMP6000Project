@@ -47,7 +47,7 @@
                         <c:otherwise>
                             <c:forEach var = "row" items = "${result.rows}">
                                 <p>
-                                    <a href="browse.jsp?forum_id='${row.id}'">${row.name}</a><br/>
+                                    <a href="browse.jsp?forum_id=${row.id}">${row.name}</a><br/>
                                 </p>
                             </c:forEach>
                         </c:otherwise>
