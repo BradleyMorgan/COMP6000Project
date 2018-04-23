@@ -52,16 +52,4 @@
             <jsp:include page="/footer.jsp"/>
     </body>    
 </html>
-
-    <%--
-    Not sure about how to implement this into JSLT yet.
-    
-    } catch (Exception dbException) {
-
-        out.println("SQL Error: " + dbException.getMessage());
-
-    }
-
-    %>
-    --%>
        

@@ -25,9 +25,15 @@
          user = "comp6000"  password = "comp6000"/>
     
     <c:if test="${param.forum_submit != null}">
-        <sql:update dataSource = "${creddit_db}" var = "result">
-         INSERT INTO forums (name) VALUES("${param.name}");
-        </sql:update>
+        <sql:transaction dataSource="${creddit_db}"> 
+            <sql:update var = "result">
+                INSERT INTO forums (name) VALUES("${param.name}");
+            </sql:update>
+          <sql:query var="nextIdTable" >
+            SELECT LAST_INSERT_ID() as lastId
+           </sql:query >
+        </sql:transaction>
+           <c:redirect url="browse.jsp?forum_id=${nextIdTable.rows[0].lastId}"/>
     </c:if>
          
          <head>
