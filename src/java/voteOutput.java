@@ -89,7 +89,7 @@ public class voteOutput extends HttpServlet {
 
             String forum_id = request.getParameter("forum_id");
             
-            out.println("<h2>Posts in " + forum_name + "</h2>");
+            out.println("<h2>Posts in " + forum_name + "</h2><br />");
             
             if (!rs.next()) {
 

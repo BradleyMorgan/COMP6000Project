@@ -23,23 +23,27 @@
         
         <jsp:include page="/header.jsp"/>
     
-    <%            
-        
+        <%            
+
         if(session.getAttribute("uid") == null) {
 
             response.sendRedirect("login.jsp?err=1");
-            
+
         } 
 
-    %>
+        %>
     
-    <form action="genreport" method="POST">
-        
-        <input type="submit" name="submit" value="Generate Report">
-        
-    </form>
+        <form action="genreport" method="POST">
+            <fieldset>
+                <legend>User Activity Report</legend>
+                <input type="submit" name="submit" value="Generate Report">
+            </fieldset>
+        </form>
+    
+        <jsp:include page="/footer.jsp"/>
     
     </body>
+    
 </html>
 
 <% } %>

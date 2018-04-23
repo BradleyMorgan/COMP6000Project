@@ -33,7 +33,7 @@
                             <td><input type="password" name="password" required/></td>               <!-- name: password -->
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Login" /> </td>
+                            <td><input type="submit" value="Login" /></td>
                             <td>
                                 <c:if test="${param.c != null}">
                                     Username or password is incorrect.
@@ -46,6 +46,7 @@
                     </table>        
                 </fieldset>        
             </form>
-        </div>                
+        </div>       
+        <jsp:include page="/footer.jsp"/>
     </body>
 </html>

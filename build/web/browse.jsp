@@ -15,6 +15,6 @@
     <body>
         <jsp:include page="/header.jsp" />
         <jsp:include page="/voteOutput" />
+        <jsp:include page="/footer.jsp"/>
     </body>
-    
 </html>

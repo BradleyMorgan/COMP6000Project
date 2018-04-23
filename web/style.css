@@ -8,10 +8,52 @@ and open the template in the editor.
     Author     : bradley
 */
 
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+form {
+    padding: 0px;
+}
+
+fieldset {
+    width: 97%;
+    margin-top: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px 0px 12px 20px;
+    font-size: 18px;
+}
+
+legend {
+    font-weight: bold;
+}
+label span {
+    font-size: 14px;
+    display: inline-block;
+    text-align: right;
+    width: 86px;
+}
+
+td input[type=submit]{
+    display: inline-block; 
+    text-align: right;
+}
+
+.button {
+  display: inline-block; 
+  width: 240px; 
+  text-align: right;
+}
+
 h1 {
     background-color: #e8e8e7;
     padding: 12px 0px 12px 24px;
-    margin-bottom: 0px
+    margin-bottom: 0px;
+}
+
+h2 {
+    margin: 18px 0px 0px 6px;
 }
 
 h3 {
@@ -19,7 +61,14 @@ h3 {
 }
 .menu {
     background-color: #999999;
-    padding: 12px 0px 12px 24px;
+    padding: 9px 0px 9px 24px;
+}
+
+.footer {
+    margin-top: 52px;
+    background-color: #EFEFEF;
+    padding: 2px 18px 4px 0px;
+    text-align: right;
 }
 
 .entry_wrapper {
@@ -61,3 +110,5 @@ h3 {
 .post_wrapper {
     
 }
+
+
