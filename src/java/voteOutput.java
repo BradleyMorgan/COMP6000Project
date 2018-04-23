@@ -89,8 +89,6 @@ public class voteOutput extends HttpServlet {
 
             String forum_id = request.getParameter("forum_id");
             
-            String test = "test";
-            
             out.println("<h2>Posts in " + forum_name + "</h2>");
             
             if (!rs.next()) {
@@ -102,7 +100,9 @@ public class voteOutput extends HttpServlet {
                 rs.beforeFirst();
 
                 while(rs.next()) {
-
+                    
+                    out.println("<div class='entry_wrapper'>");
+                    
                     String up_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id+"&count=1'>&#x25B2;</a>";
                     String down_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id+"&count=-1'>&#x25BC;</a>";
 
@@ -118,13 +118,13 @@ public class voteOutput extends HttpServlet {
                            if(vrs.getInt(1) > 0) {
 
                                 if(vrs.getInt(2) == 1) {
-                                   up_arrow = "<span style='color: red'>&#x25B2</span>";
+                                   up_arrow = "<span class='selected_arrow'>&#x25B2</span>";
                                    down_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id + "&count=-1&update=1'>&#x25BC;</a>";
                                 }
 
                                 if(vrs.getInt(2) == -1) {
                                     up_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id + "&count=1&update=1'>&#x25B2;</a>";
-                                    down_arrow = "<span style='color: red'>&#x25BC;</span>";
+                                    down_arrow = "<span class='selected_arrow'>&#x25BC;</span>";
                                 }
 
                                 if(vrs.getInt(2) == 0) {
@@ -132,41 +132,45 @@ public class voteOutput extends HttpServlet {
                                     down_arrow = "<a href='vote?post_id=" + rs.getString(4)+"&forum_id="+forum_id + "&count=-1&update=1'>&#x25BC;</a>";
                                 }
 
-                                out.println("<div style='clear: left; overflow: auto;'>");
-                                out.println("<div style='float: left; margin-right: 18px; text-align: center;'>" + up_arrow + "<br />" + rs.getInt(5) + "<br />" + down_arrow + "</div>");
-
+                                out.println("<div class='vote_wrapper'>");
+                                out.println("<div class='vote_arrow'>" + up_arrow + "<br />" + rs.getInt(5) + "<br />" + down_arrow + "</div>");
+                                out.println("</div>");
+                                
                            } else {
 
-                                out.println("<div style='clear: left; overflow: auto;'>");
-                                out.println("<div style='float: left; margin-right: 18px; text-align: center;'>" + up_arrow + "<br />" + rs.getInt(5) + "<br />" + down_arrow + "</div>");
+                                out.println("<div class='vote_wrapper'>");
+                                out.println("<div class='vote_arrow'>" + up_arrow + "<br />" + rs.getInt(5) + "<br />" + down_arrow + "</div>");
+                                out.println("</div>");
                            }
 
                         } else {
 
-                            out.println("<div style='clear: left; overflow: auto;'>");
-                            out.println("<div style='float: left; margin-right: 18px; text-align: center;'>" + up_arrow + "<br />" + rs.getInt(5) + "<br />" + down_arrow + "</div>");
+                            out.println("<div class='vote_wrapper'>");
+                            out.println("<div class='vote_arrow'>" + up_arrow + "<br />" + rs.getInt(5) + "<br />" + down_arrow + "</div>");
+                            out.println("</div>");
 
                         }
 
                     } else {
 
-                        out.println("<div style='clear: left; overflow: auto;'>");
-                        out.println("<div style='float: left; margin-right: 18px; text-align: center;'>&#x25B2;<br />"+rs.getInt(5)+"<br />&#x25BC;</div>");
+                        out.println("<div class='vote_wrapper'>");
+                        out.println("<div class='vote_arrow'>&#x25B2;<br />"+rs.getInt(5)+"<br />&#x25BC;</div>");
+                        out.println("</div>");
 
 
                     }
-
+                    
                     java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 
-                    out.println("<div style='float: left;'><b>" + rs.getString(1)+"</b><br />Posted by "+ rs.getString(3) + " on " + rs.getString(6) + "<br />" + rs.getString(2) + "</div>");
+                    out.println("<div class='post_wrapper'><b>" + rs.getString(1)+"</b><br />Posted by "+ rs.getString(3) + " on " + rs.getString(6) + "<br />" + rs.getString(2) + "</div>");
+                    
                     out.println("</div>");
-                    out.println("<hr />");
 
                 }
 
             }
 
-            out.println("<div style='clear: left;'><a href='post.jsp?forum_id=" + forum_id + "'>Post</a></div>");
+            out.println("<div style='clear: left;'><a href='post.jsp?forum_id="+forum_id+"'>Post</a></div>");
 
         } catch (Exception dbException) {
 

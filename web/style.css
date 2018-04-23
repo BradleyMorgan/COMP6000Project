@@ -8,3 +8,56 @@ and open the template in the editor.
     Author     : bradley
 */
 
+h1 {
+    background-color: #e8e8e7;
+    padding: 12px 0px 12px 24px;
+    margin-bottom: 0px
+}
+
+h3 {
+    margin-left: 8px;
+}
+.menu {
+    background-color: #999999;
+    padding: 12px 0px 12px 24px;
+}
+
+.entry_wrapper {
+    clear: left;
+    width: 100%;
+    margin-bottom: 24px;
+    border: 1px solid gray;
+    padding: 12px 0px 12px 0px;
+}
+.vote_wrapper {
+    width: 60px;
+    float: left;
+}
+
+.vote_arrow {
+    text-decoration: none; 
+    text-align: center;
+}
+
+.selected_arrow {
+    color: red;
+}
+
+.vote_arrow a {
+    text-decoration: none; 
+    color: black;
+}
+
+.vote_arrow:link {
+    text-decoration: none;
+    color: black;
+}
+
+.vote_arrow:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.post_wrapper {
+    
+}
