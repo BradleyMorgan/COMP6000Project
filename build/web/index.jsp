@@ -15,11 +15,6 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Creddit :: A COMP 6000 Web Application </title>
-    </head>
-    <body>
         <jsp:include page="/header.jsp"/>
         <c:choose>
             <c:when test = "${sessionScope.uname != null}">
@@ -45,13 +40,16 @@
                             <h4>No Subcreddits Available</h4>
                         </c:when>
                         <c:otherwise>
+                            <ul>
                             <c:forEach var = "row" items = "${result.rows}">
-                                <p>
+                                <li>
                                     <a href="browse.jsp?forum_id=${row.id}">${row.name}</a><br/>
-                                </p>
+                                </li>
                             </c:forEach>
+                        </ul>
                         </c:otherwise>
                     </c:choose>
+            <jsp:include page="/footer.jsp"/>
     </body>    
 </html>
 

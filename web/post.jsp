@@ -62,6 +62,7 @@
                     <input type="submit" name="post_submit" value="Submit Post">
                 </span>
             </fieldset>
-        </form>     
+        </form>   
+        <jsp:include page="/footer.jsp"/>
     </body>
 </html>
