@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author bradley
  */
+
 @WebServlet(urlPatterns = {"/vote"})
 public class vote extends HttpServlet {
 
@@ -57,7 +58,7 @@ public class vote extends HttpServlet {
     
             conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");
             
-            if(request.getParameter("post_id") != null) {
+            if(request.getParameter("post_id") != null || request.getParameter("comment_id") != null) {
            
                 HttpSession session = request.getSession();
                 
@@ -71,24 +72,46 @@ public class vote extends HttpServlet {
                 
                 String post_id = request.getParameter("post_id");
                 String forum_id = request.getParameter("forum_id");
+                String comment_id = request.getParameter("comment_id");
+                
                 String count = request.getParameter("count");
                 st = conn.createStatement();
-
+                                
                 if(request.getParameter("update") != null) {
                     
                     String query = "UPDATE votes SET vote = vote + " + count + " WHERE post_id = " + post_id + " AND user_id = " + session.getAttribute("uid").toString() +";";
 
+                    if(request.getParameter("comment_id") != null) {
+                        
+                        query = "UPDATE comment_votes SET vote = vote + " + count + " WHERE comment_id = " + comment_id + " AND user_id = " + session.getAttribute("uid").toString() +";";
+                        
+                    }
+                    
                     st.executeUpdate(query);  
                     
                 } else {
                     
                     String query = "INSERT INTO votes (user_id, post_id, vote) VALUES("+session.getAttribute("uid").toString()+","+post_id+","+count+");";
 
+                    if(request.getParameter("comment_id") != null) {
+                        
+                        query = "INSERT INTO comment_votes (user_id, comment_id, vote) VALUES("+session.getAttribute("uid").toString()+","+comment_id+","+count+");";
+                        
+                    }
+                    
                     st.executeUpdate(query);  
                 
                 }
                 
-                response.sendRedirect("browse.jsp?forum_id="+forum_id);
+                if(request.getParameter("comment_id") != null) {
+                    
+                    response.sendRedirect("comment.jsp?post_id="+post_id+"&forum_id="+forum_id);
+                    
+                } else {
+                
+                    response.sendRedirect("browse.jsp?forum_id="+forum_id);
+                    
+                }
             
             }
             
