@@ -135,8 +135,9 @@ h4 {
 }
 
 .comment_body {
-    margin: 8px 0px 0px 12px;
-    min-height: 50px;
+    margin: 8px 0px 0px 0px;
+    min-height: 60px;
+    display: inline-block;
 }
 
 a.secondary {
