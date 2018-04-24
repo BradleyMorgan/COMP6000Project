@@ -78,6 +78,7 @@ public class commentOutput extends HttpServlet {
                 while(rs.next()) {
                     
                     out.println("<div class='comment_wrapper'>");
+                    out.println("<div class='comment_header'>Comment by "+ rs.getString(3) + " on " + rs.getString(5) + "</div>");
                     
                     String up_arrow = "<a href='vote?post_id="+post_id+"&comment_id=" + rs.getString(1) + "&forum_id="+forum_id+"&count=1'>&#x25B2;</a>";
                     String down_arrow = "<a href='vote?post_id="+post_id+"&comment_id=" + rs.getString(1) + "&forum_id="+forum_id+"&count=-1'>&#x25BC;</a>";
@@ -137,7 +138,6 @@ public class commentOutput extends HttpServlet {
                     
                     java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 
-                    out.println("<div class='comment_header'>Comment by "+ rs.getString(3) + " on " + rs.getString(3) + "</div>");
                     out.println("<div class='comment_body'>" + rs.getString(2) + "</div>");
                     
                     out.println("</div>");

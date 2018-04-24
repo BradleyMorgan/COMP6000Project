@@ -125,10 +125,15 @@ h4 {
 
 .comment_header {
     background-color: #E8E8E8;
+    height: 24px;
+    padding: 6px 0px 2px 6px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .comment_body {
     margin: 8px 0px 0px 12px;
+    min-height: 40px;
 }
 
 a.secondary {
