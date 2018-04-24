@@ -14,7 +14,6 @@
         <title>Creddit :: A COMP 6000 Web Application </title>
     </head>
     <body>
-    <body>
-        <div><h1>&#x1F92F; Creddit: A COMP 6000 Project</h1></div>
+        <div><h1><span style='font-size: 46px; vertical-align: middle;'> &#x1F92F; </span> Creddit: A COMP 6000 Project</h1></div>
         <div class="menu"><a href="index.jsp">Home</a> | ${sessionScope.uname != null ? "<a href='logout'>Log Out</a>" : "<a href='login.jsp'>Log In</a>"} | <a href="register.jsp">Register</a> | <a href="db.jsp">New Subcreddit</a> | <a href="report.jsp">Reports</a></div>
     

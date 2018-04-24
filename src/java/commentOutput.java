@@ -148,7 +148,8 @@ public class commentOutput extends HttpServlet {
 
             
             out.println("<br /><hr /><a class='primary' href='browse.jsp?forum_id="+forum_id+"'>Back to Post</a>");
-
+            out.println("<div class=\"footer\">Copyright © 2018</div></body></html>");
+            
         } catch (Exception dbException) {
 
 

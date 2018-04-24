@@ -48,13 +48,14 @@ label span {
 }
 
 h1 {
-    background-color: #e8e8e7;
+    background-color: #7395AE;
     padding: 12px 0px 12px 24px;
     margin: 0px;
     -webkit-margin-before: 0px;
     -webkit-margin-after: 0px;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
+    letter-spacing: 1px;
 }
 
 h2 {
@@ -70,14 +71,14 @@ h4 {
 }
 
 .menu {
-    background-color: #999999;
+    background-color: #C2CAD0;
     padding: 7px 0px 8px 24px;
 }
 
 .footer {
     font-size: 14px;
     margin-top: 52px;
-    background-color: #EFEFEF;
+    background-color: #7395AE;
     padding: 2px 18px 4px 0px;
     text-align: right;
 }
@@ -140,7 +141,7 @@ h4 {
     display: inline-block;
 }
 
-a.secondary {
+a.secondary {   
 	padding: 0px;
 	display: inline-block;
 	margin: 0px;

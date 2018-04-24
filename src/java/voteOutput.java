@@ -173,6 +173,7 @@ public class voteOutput extends HttpServlet {
             }
 
             out.println("<hr /><div style='clear: left;'><a class='primary' href='post.jsp?forum_id="+forum_id+"'>Post</a></div>");
+            out.println("<div class=\"footer\">Copyright © 2018</div></body></html>");
 
         } catch (Exception dbException) {
 

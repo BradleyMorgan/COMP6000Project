@@ -8,5 +8,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<div class="footer">Copyright © 2018</div>
+        <div class="footer">Copyright © 2018</div>
+
+    </body>
     
+</html>
