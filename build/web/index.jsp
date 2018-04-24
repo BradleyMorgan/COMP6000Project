@@ -25,7 +25,7 @@
             </c:otherwise>
         </c:choose>
                 
-                <h3>Choose a Subcreddit</h3>
+                <h3 class="car">Choose a Subcreddit</h3>
                 
                 <sql:setDataSource var = "creddit_db" driver = "com.mysql.jdbc.Driver"
                                    url = "jdbc:mysql://localhost/comp6000"

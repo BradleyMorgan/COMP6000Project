@@ -18,7 +18,7 @@
     <body>
         <jsp:include page="/header.jsp"/>
         <h2>Creddit Login</h2>
-        <div>
+        <div class="car">
             <form name="loginform" method="POST" action="loginprocess.jsp">            <!-- On submit, the page will be redirected to loginprocess.jsp -->
                 <fieldset>
                     <legend>Login</legend>
@@ -33,7 +33,7 @@
                             <td><input type="password" name="password" required/></td>               <!-- name: password -->
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Login" /></td>
+                            <td><input class="bike" type="submit" value="Login"   /></td>
                             <td>
                                 <c:if test="${param.c != null}">
                                     Username or password is incorrect.

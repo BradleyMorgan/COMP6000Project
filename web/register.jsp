@@ -86,7 +86,7 @@
         <jsp:include page="/header.jsp"/>
         <h2>Creddit User Registration</h2>
         
-        <form name="signupform" method="POST" action="registrationProcess.jsp" onSubmit="return validate()">
+        <form class="car" name="signupform" method="POST" action="registrationProcess.jsp" onSubmit="return validate()">
             <fieldset>
                 <legend>User Registration</legend>
                 <table>
@@ -108,7 +108,7 @@
                         <td><input type="password" name="confirm" /></td>               <!-- name: confirm -->
                     </tr>
                     <tr>
-                        <td><input type="submit" name="signup" value="Sign up" /></td>
+                        <td><input ="submit" class="bike"  name="signup" value="Sign up" /></td>
                         <td>
                             <span id="msg"> </span>
                             

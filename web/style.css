@@ -39,18 +39,33 @@ td input[type=submit]{
     display: inline-block; 
     text-align: right;
 }
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+} 
 
 .button {
   display: inline-block; 
   width: 240px; 
   text-align: right;
+  background-color: white;
+  
+  
 }
 
 h1 {
-    background-color: #e8e8e7;
+    background-color: #2196F3;
     padding: 12px 0px 12px 24px;
     margin-bottom: 0px;
+    text-align: center;
 }
+
 
 h2 {
     margin: 18px 0px 0px 6px;
@@ -60,8 +75,10 @@ h3 {
     margin-left: 8px;
 }
 .menu {
-    background-color: #999999;
+    
+    background-color: cadetblue;
     padding: 9px 0px 9px 24px;
+    align-content: center;
 }
 
 .footer {
@@ -110,5 +127,18 @@ h3 {
 .post_wrapper {
     
 }
-
+.car{
+    
+    background-color: pink;
+    
+}
+.bike{
+    background-color: yellow;
+    
+}
+.truck{
+    background-color: blue;
+    
+    
+}
 
