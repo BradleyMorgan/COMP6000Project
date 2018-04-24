@@ -22,9 +22,12 @@
             </c:when>
             <c:otherwise>
                 <h2>Welcome to Creddit</h2>
-                <hr />
             </c:otherwise>
         </c:choose>
+                
+                <p>Creddit is a web content aggregation, crowdsourcing, and discussion web application that allows users to post, comment, and vote on content.<br />You can browse existing subcreddits, or log in or register to contribute new content.</p>
+                
+                <hr />
                 
                 <h3>Choose a Subcreddit</h3>
                 
@@ -38,7 +41,7 @@
                 
                     <c:choose>
                         <c:when test = "${result.rowCount == 0 || result == null}">
-                            <h4>No Subcreddits Available</h4>
+                            <h4>No Subcreddits Available. Log in or Register to create one!</h4>
                         </c:when>
                         <c:otherwise>
                             <ul>

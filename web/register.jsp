@@ -50,8 +50,13 @@
                     document.getElementById("msg").innerHTML="Enter Email Address";
                     str=false;
                 }
+                
+                if(validateEmail(document.signupform.email.value) === false) {
+                    document.getElementById("msg").innerHTML="Enter a Valid Email Address";
+                    str=false;
+                }
 
-                if (str == false){
+                if (str === false){
       
                     if(event.preventDefault) {
                         event.preventDefault();
@@ -63,6 +68,11 @@
     
                 return str; 
                 
+            }
+            
+            function validateEmail(email) {
+                var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return emailRegex.test(String(email).toLowerCase());
             }
         
         </script>
