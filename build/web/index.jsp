@@ -22,6 +22,7 @@
             </c:when>
             <c:otherwise>
                 <h2>Welcome to Creddit</h2>
+                <hr />
             </c:otherwise>
         </c:choose>
                 
@@ -36,7 +37,7 @@
                 </sql:query>
                 
                     <c:choose>
-                        <c:when test = "${result == null}">
+                        <c:when test = "${result.rowCount == 0 || result == null}">
                             <h4>No Subcreddits Available</h4>
                         </c:when>
                         <c:otherwise>

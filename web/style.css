@@ -57,11 +57,16 @@ h2 {
 }
 
 h3 {
-    margin-left: 8px;
+    margin-left: 12px;
 }
+
+h4 {
+    margin-left: 16px;
+}
+
 .menu {
     background-color: #999999;
-    padding: 9px 0px 9px 24px;
+    padding: 7px 0px 8px 24px;
 }
 
 .footer {
