@@ -2,14 +2,14 @@
 
 I. Install with NetBeans...
 
-1.) Launch NetBeans
-2.) Team Menu -> Git -> Clone
-3.) For RepositoryURL, enter github.com:BradleyMorgan/COMP6000Project.git
-4.) Click "Next..."
-5.) Choose the Master branch if prompted
-6.) Click "Next..."
-7.) Make sure "Scan for NetBeans projects after clone" is checked.
-8.) Click Finish
+1. Launch NetBeans
+2. Team Menu -> Git -> Clone
+3. For RepositoryURL, enter github.com:BradleyMorgan/COMP6000Project.git
+4. Click "Next..."
+5. Choose the Master branch if prompted
+6. Click "Next..."
+7. Make sure "Scan for NetBeans projects after clone" is checked.
+8. Click Finish
 
 The files will be downloaded to the location specified in the clone window.
 
