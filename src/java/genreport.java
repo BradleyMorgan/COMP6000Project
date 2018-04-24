@@ -41,7 +41,7 @@ public class genreport extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
  
             String context = this.getServletContext().getRealPath("/");
-            String strPath = context + "./xml/users.xml";
+            String strPath = context + "xml/users.xml";
             File strFile = new File(strPath);
             boolean fileCreated = strFile.createNewFile();
                 
@@ -70,7 +70,7 @@ public class genreport extends HttpServlet {
 
                 st = conn.createStatement();
 
-                String query = "SELECT users.id, username, email, COALESCE(post_count, 0), COALESCE(upvote_count, 0), COALESCE(downvote_count, 0), timestamp FROM users " 
+                String query = "SELECT users.id, username, email, COALESCE(post_count, 0), COALESCE(upvote_count, 0), COALESCE(downvote_count, 0), DATE_FORMAT(timestamp, '%Y-%m-%d'), DATE_FORMAT(timestamp, '%r') FROM users " 
                         + "LEFT JOIN (SELECT user_id, COUNT(*) AS post_count FROM posts GROUP BY user_id) AS pc ON users.id = pc.user_id "
                         + "LEFT JOIN (SELECT user_id, COUNT(*) AS upvote_count FROM votes WHERE vote=1 GROUP BY user_id) AS upvotes ON users.id = upvotes.user_id "
                         + "LEFT JOIN (SELECT user_id, COUNT(*) AS downvote_count FROM votes WHERE vote=-1 GROUP BY user_id) AS downvotes ON users.id = downvotes.user_id";                   
@@ -85,7 +85,8 @@ public class genreport extends HttpServlet {
                     objWriter.write("\t\t<postcount>"+rs.getString(4)+"</postcount>\n");
                     objWriter.write("\t\t<upvotes>"+rs.getString(5)+"</upvotes>\n");
                     objWriter.write("\t\t<downvotes>"+rs.getString(6)+"</downvotes>\n");
-                    objWriter.write("\t\t<ctime>"+rs.getString(7)+"</ctime>\n");
+                    objWriter.write("\t\t<cdate>"+rs.getString(7)+"</cdate>\n");
+                    objWriter.write("\t\t<ctime>"+rs.getString(8)+"</ctime>\n");
                     objWriter.write("\t</user>\n");
 
                 }
@@ -94,7 +95,7 @@ public class genreport extends HttpServlet {
 
                 String forum_id = request.getParameter("forum_id");
                 
-                RequestDispatcher rd = request.getRequestDispatcher("browse.jsp?err=2&forum_id="+forum_id);
+                RequestDispatcher rd = request.getRequestDispatcher("report.jsp?err=2&forum_id="+forum_id);
                     
                 rd.forward(request,response);
 
