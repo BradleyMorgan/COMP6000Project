@@ -51,12 +51,13 @@ public class loginValidation extends HttpServlet {
                     conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");
                     st = conn.createStatement();
 
-                    String sessionSetting = "SELECT id, username FROM users WHERE username = '"+request.getParameter("username")+"'"; 
+                    String sessionSetting = "SELECT id, username, admin FROM users WHERE username = '"+request.getParameter("username")+"'"; 
                     rs = st.executeQuery(sessionSetting);
                     if(rs.next())
                     {
                         session.setAttribute("uname", rs.getString("username"));          //session created... name: 'uname' and value: 'username' of the user    
                         session.setAttribute("uid", rs.getString("id"));
+                        session.setAttribute("admin", rs.getString("admin"));
                        
                     }
                     response.sendRedirect("index.jsp");

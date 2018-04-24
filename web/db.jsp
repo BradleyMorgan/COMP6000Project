@@ -29,9 +29,9 @@
             <sql:update var = "result">
                 INSERT INTO forums (name) VALUES("${param.name}");
             </sql:update>
-          <sql:query var="nextIdTable" >
-            SELECT LAST_INSERT_ID() as lastId
-           </sql:query >
+            <sql:query var="nextIdTable" >
+                SELECT LAST_INSERT_ID() as lastId
+            </sql:query >
         </sql:transaction>
            <c:redirect url="browse.jsp?forum_id=${nextIdTable.rows[0].lastId}"/>
     </c:if>
