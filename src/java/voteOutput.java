@@ -164,8 +164,8 @@ public class voteOutput extends HttpServlet {
                     
                     java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 
-                    out.println("<div class='post_wrapper'><b>" + rs.getString(1)+"</b><br />Posted by "+ rs.getString(3) + " on " + rs.getString(6) + "<br />" + rs.getString(2) + "</div>");
-                    out.println("<a class='secondary' href='comment.jsp?post_id="+rs.getString(4)+"&forum_id="+forum_id+"'>" + rs.getString(7) + " Comments</a>");
+                    out.println("<div class='post_wrapper'><b>" + rs.getString(1)+"</b><br />Posted by "+ rs.getString(3) + " on " + rs.getString(6) + "<br />" + rs.getString(2));
+                    out.println("<br /><a class='secondary' href='comment.jsp?post_id="+rs.getString(4)+"&forum_id="+forum_id+"'>" + rs.getString(7) + " Comments</a></div>");
                     out.println("</div>");
 
                 }

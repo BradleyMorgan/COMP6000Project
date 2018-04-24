@@ -89,7 +89,8 @@ h4 {
 }
 .vote_wrapper {
     width: 60px;
-    float: left;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .vote_arrow {
@@ -117,7 +118,7 @@ h4 {
 }
 
 .post_wrapper {
-    
+    display: inline-block;
 }
 
 .comment_wrapper {
