@@ -8,8 +8,13 @@ and open the template in the editor.
     Author     : bradley
 */
 
+html, body, h1 {
+        margin: 0;
+    }
+    
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0px;
 }
 
 form {
@@ -45,11 +50,15 @@ label span {
 h1 {
     background-color: #e8e8e7;
     padding: 12px 0px 12px 24px;
-    margin-bottom: 0px;
+    margin: 0px;
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
 }
 
 h2 {
-    margin: 18px 0px 0px 6px;
+    margin: 18px 0px 0px 12px;
 }
 
 h3 {
@@ -74,10 +83,7 @@ h4 {
 }
 
 .entry_wrapper {
-    clear: left;
-    width: 100%;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin: 18px 18px;
     border: 1px solid gray;
     padding: 12px 0px 12px 0px;
 }
@@ -115,12 +121,8 @@ h4 {
 }
 
 .comment_wrapper {
-    clear: left;
-    width: 95%;
-    margin-bottom: 24px;
+    margin: 18px 18px;
     border: 1px solid gray;
-    padding: 0px 0px 12px 0px;
-    margin: 12px 0px 24px 24px;
 }
 
 .comment_header {
@@ -133,7 +135,7 @@ h4 {
 
 .comment_body {
     margin: 8px 0px 0px 12px;
-    min-height: 40px;
+    min-height: 50px;
 }
 
 a.secondary {
@@ -164,7 +166,7 @@ a.primary{
 }
 
 a.primary:link, a.primary:visited, a.primary:focus {
-  margin-left: 0px;
+  margin-left: 12px;
 }
 
 a.primary:hover {     
