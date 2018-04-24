@@ -22,24 +22,25 @@
     <body>
         
         <jsp:include page="/header.jsp"/>
-    
-        <%            
+        
+        <c:if test = "${sessionScope.uname == null}">
+            <c:redirect url="login.jsp?b"/>
+        </c:if>
 
-        if(session.getAttribute("uid") == null) {
-
-            response.sendRedirect("login.jsp?err=1");
-
-        } 
-
-        %>
-    
-        <form action="genreport" method="POST">
-            <fieldset>
-                <legend>User Activity Report</legend>
-                <input type="submit" name="submit" value="Generate Report">
-            </fieldset>
-        </form>
-    
+                <form action="genreport" method="POST" target="_blank">
+                    <fieldset>
+                        <legend>User Activity Report</legend>
+                        <c:choose>
+                            <c:when test="${sessionScope.admin eq '0'}">
+                                <h3>Administrative access is required for reporting. Please log in with an administrator account.</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <input type="submit" name="submit" value="Generate Report">
+                            </c:otherwise>
+                        </c:choose>
+                    </fieldset>
+                </form>
+        
         <jsp:include page="/footer.jsp"/>
     
     </body>

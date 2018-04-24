@@ -33,79 +33,78 @@
                     str=false;
                 }
 
-                if(document.signupform.password.value == '')
+                if(document.signupform.password.value === '')
                 {
                     document.getElementById("msg").innerHTML="Enter Password";
                     str=false;
                 }
 
-                if(document.signupform.username.value == '')
+                if(document.signupform.username.value === '')
                 {
                     document.getElementById("msg").innerHTML="Enter Username";
                     str=false;
                 }
-
-                lastname = document.signupform.lastname.value;
-                if(isNaN(lastname))
+                
+                if(document.signupform.email.value === '')
                 {
+                    document.getElementById("msg").innerHTML="Enter Email Address";
+                    str=false;
                 }
-                else
-                {
-                    document.getElementById("msg").innerHTML="Numbers are not allowed for last name!";
+                
+                if(validateEmail(document.signupform.email.value) === false) {
+                    document.getElementById("msg").innerHTML="Enter a Valid Email Address";
                     str=false;
                 }
 
-                if(document.signupform.lastname.value == '')
-                {
-                    document.getElementById("msg").innerHTML="Enter Lastname";
-                    str=false;
-                }
+                if (str === false){
+      
+                    if(event.preventDefault) {
+                        event.preventDefault();
+                    } else {
+                        event.returnValue = false;
+                    }
 
-                firstname = document.signupform.firstname.value;
-                if(isNaN(firstname))
-                {
                 }
-                else
-                {
-                    document.getElementById("msg").innerHTML="Numbers are not allowed for first name!";
-                    str=false;
-                }
-
-                if(document.signupform.firstname.value == '')
-                {
-                    document.getElementById("msg").innerHTML="Enter Firstname";
-                    str=false;
-                } 
+    
                 return str; 
+                
+            }
+            
+            function validateEmail(email) {
+                var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return emailRegex.test(String(email).toLowerCase());
             }
         
         </script>
+        
     </head>
 
     <body>
+        
         <jsp:include page="/header.jsp"/>
+        
         <h2>Creddit User Registration</h2>
         
         <form name="signupform" method="POST" action="registrationProcess.jsp" onSubmit="return validate()">
             <fieldset>
-                <legend>User Registration</legend>
+                <legend>Account Information</legend>
                 <table>
                 
                     <tr>
                         <td>Username:</td>
-                        <td><input type="text" name="username" /></td>                  <!-- name: username -->
+                        <td><input type="text" name="username" /></td>
                     </tr>
                     <tr>
                         <td>Email Address:</td>
-                        <td><input type="text" name="email" /></td>                 <!-- name: firstname -->
+                        <td><input type="text" name="email" /></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><input type="password" name="password" /></td>              <!-- name: password -->
+                        <td><input type="password" name="password" /></td>
                     </tr>
                     <tr>
                         <td>Confirm Password:</td>
-                        <td><input type="password" name="confirm" /></td>               <!-- name: confirm -->
+                        <td><input type="password" name="confirm" /></td>
                     </tr>
                     <tr>
                         <td><input type="submit" name="signup" value="Sign up" /></td>
@@ -115,22 +114,7 @@
                             <c:if test="${param.a != null}">
                                 Username already exists.
                             </c:if>
-                            
-                            
-                            <%--
-                            <%
-                                if(request.getParameter("a")!= null) {
-                                    //check the value for variable "a"
-                                    out.println("Username already exists..! Please login to continue.!");
-                                }
-
-                                if(request.getParameter("b")!= null) {
-                                    //check the value for variable "b"
-                                    out.println("You must login to continue.!");
-                                }
-                            %>
-                            --%>
-
+                                
                         </td>                      
                     </tr>
                 </table>

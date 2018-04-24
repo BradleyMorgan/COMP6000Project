@@ -5,6 +5,7 @@
  */
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,9 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author bradley
  */
-
-@WebServlet(urlPatterns = {"/vote"})
-public class vote extends HttpServlet {
+@WebServlet(urlPatterns = {"/comment"})
+public class comment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,11 +33,7 @@ public class vote extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.setContentType("text/html;charset=UTF-8");
-        
-        String referer = request.getHeader("Referer");
-        
+
             java.sql.Connection conn;
             java.sql.ResultSet rs;
             java.sql.Statement st;
@@ -58,7 +54,7 @@ public class vote extends HttpServlet {
     
             conn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/comp6000", "comp6000", "comp6000");
             
-            if(request.getParameter("post_id") != null || request.getParameter("comment_id") != null) {
+            if(request.getParameter("post_id") != null) {
            
                 HttpSession session = request.getSession();
                 
@@ -72,46 +68,16 @@ public class vote extends HttpServlet {
                 
                 String post_id = request.getParameter("post_id");
                 String forum_id = request.getParameter("forum_id");
-                String comment_id = request.getParameter("comment_id");
+                String user_id = session.getAttribute("uid").toString();
+                String body = request.getParameter("body");
                 
-                String count = request.getParameter("count");
                 st = conn.createStatement();
-                                
-                if(request.getParameter("update") != null) {
-                    
-                    String query = "UPDATE votes SET vote = vote + " + count + " WHERE post_id = " + post_id + " AND user_id = " + session.getAttribute("uid").toString() +";";
+                
+                String query = "INSERT INTO comments (user_id, post_id, body) VALUES("+user_id+","+post_id+",'"+body+"');";
 
-                    if(request.getParameter("comment_id") != null) {
-                        
-                        query = "UPDATE comment_votes SET vote = vote + " + count + " WHERE comment_id = " + comment_id + " AND user_id = " + session.getAttribute("uid").toString() +";";
-                        
-                    }
-                    
-                    st.executeUpdate(query);  
-                    
-                } else {
-                    
-                    String query = "INSERT INTO votes (user_id, post_id, vote) VALUES("+session.getAttribute("uid").toString()+","+post_id+","+count+");";
-
-                    if(request.getParameter("comment_id") != null) {
-                        
-                        query = "INSERT INTO comment_votes (user_id, comment_id, vote) VALUES("+session.getAttribute("uid").toString()+","+comment_id+","+count+");";
-                        
-                    }
-                    
-                    st.executeUpdate(query);  
+                st.executeUpdate(query);  
                 
-                }
-                
-                if(request.getParameter("comment_id") != null) {
-                    
-                    response.sendRedirect("comment.jsp?post_id="+post_id+"&forum_id="+forum_id);
-                    
-                } else {
-                
-                    response.sendRedirect("browse.jsp?forum_id="+forum_id);
-                    
-                }
+                response.sendRedirect("comment.jsp?post_id="+post_id+"&forum_id="+forum_id);
             
             }
             
@@ -124,8 +90,9 @@ public class vote extends HttpServlet {
                 rd.forward(request,response);
 
             }   
-
-    }
+        
+        }
+   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
