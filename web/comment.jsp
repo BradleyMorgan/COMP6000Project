@@ -15,10 +15,10 @@
                 <legend>Add Comment</legend>
                 <input type='hidden' name='post_id' value='${param.post_id}'>
                 <input type='hidden' name='forum_id' value='${param.forum_id}'>
-                <p>
-                    <label for="body"><span>Body</span></label>
-                    <textarea name="body" cols="60" rows="12" ></textarea>
-                </p>          
+               
+                    <textarea name="body" cols="60" rows="8" ></textarea>
+                
+                    <br />
                 
                 <span class="button">
                     <input type="submit" name="comment_submit" value="Submit Comment">

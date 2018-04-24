@@ -67,11 +67,13 @@ public class voteOutput extends HttpServlet {
 
             }
 
-            query = "SELECT title, body, username, posts.id, v1.vote_count, DATE_FORMAT(posts.timestamp, '%b. %D at %H:%i') as formatted_date " +
+            query = "SELECT title, body, username, posts.id, v1.vote_count, DATE_FORMAT(posts.timestamp, '%b. %D at %H:%i') as formatted_date, COALESCE(c1.comment_count, 0) " +
                     "FROM forum_posts JOIN posts ON posts.id = forum_posts.post_id " +
                     "JOIN users ON users.id = posts.user_id " +
                     "LEFT JOIN (SELECT MAX(post_id) as post_id, SUM(vote) as vote_count FROM votes GROUP BY(post_id)) v1 " +
-                    "ON forum_posts.post_id = v1.post_id " + 
+                    "ON forum_posts.post_id = v1.post_id " +
+                    "LEFT JOIN (SELECT post_id, COALESCE(COUNT(*), '0') AS comment_count FROM comments GROUP BY(post_id)) c1 " +
+                    "ON forum_posts.post_id = c1.post_id " + 
                     "WHERE forum_posts.forum_id ="+forum_id+";";
 
             rs = st.executeQuery(query);
@@ -89,7 +91,7 @@ public class voteOutput extends HttpServlet {
 
             String forum_id = request.getParameter("forum_id");
             
-            out.println("<h2>Posts in " + forum_name + "</h2><br />");
+            out.println("<h2>Posts in " + forum_name + "</h2>");
             
             if (!rs.next()) {
 
@@ -163,14 +165,14 @@ public class voteOutput extends HttpServlet {
                     java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 
                     out.println("<div class='post_wrapper'><b>" + rs.getString(1)+"</b><br />Posted by "+ rs.getString(3) + " on " + rs.getString(6) + "<br />" + rs.getString(2) + "</div>");
-                    out.println("<a href='comment.jsp?post_id="+rs.getString(4)+"&forum_id="+forum_id+"'>Comments</a>");
+                    out.println("<a class='secondary' href='comment.jsp?post_id="+rs.getString(4)+"&forum_id="+forum_id+"'>" + rs.getString(7) + " Comments</a>");
                     out.println("</div>");
 
                 }
 
             }
 
-            out.println("<div style='clear: left;'><a href='post.jsp?forum_id="+forum_id+"'>Post</a></div>");
+            out.println("<hr /><div style='clear: left;'><a class='primary' href='post.jsp?forum_id="+forum_id+"'>Post</a></div>");
 
         } catch (Exception dbException) {
 

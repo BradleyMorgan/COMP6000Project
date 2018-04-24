@@ -27,20 +27,20 @@
             <c:redirect url="login.jsp?b"/>
         </c:if>
 
-        <c:choose>
-            <c:when test="${sessionScope.admin eq '0'}">
-                <p>You are not an admin.</p>
-            </c:when>
-            <c:otherwise>
                 <form action="genreport" method="POST" target="_blank">
                     <fieldset>
                         <legend>User Activity Report</legend>
-                        <input type="submit" name="submit" value="Generate Report">
+                        <c:choose>
+                            <c:when test="${sessionScope.admin eq '0'}">
+                                <h3>Administrative access is required for reporting. Please log in with an administrator account.</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <input type="submit" name="submit" value="Generate Report">
+                            </c:otherwise>
+                        </c:choose>
                     </fieldset>
                 </form>
-            </c:otherwise>
-        </c:choose>
-    
+        
         <jsp:include page="/footer.jsp"/>
     
     </body>

@@ -18,7 +18,7 @@
         <jsp:include page="/header.jsp"/>
         <c:choose>
             <c:when test = "${sessionScope.uname != null}">
-                <h2>Welcome to Creddit, ${sessionScope.uname} </h2>
+                <h2>Welcome to Creddit, ${sessionScope.uname}. </h2>
             </c:when>
             <c:otherwise>
                 <h2>Welcome to Creddit</h2>
