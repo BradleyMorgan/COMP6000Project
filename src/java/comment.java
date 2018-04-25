@@ -5,7 +5,6 @@
  */
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,7 +35,7 @@ public class comment extends HttpServlet {
 
             java.sql.Connection conn;
             java.sql.ResultSet rs;
-            java.sql.Statement st;
+            java.sql.PreparedStatement st;
 
             try {
                 
@@ -70,13 +69,15 @@ public class comment extends HttpServlet {
                 String forum_id = request.getParameter("forum_id");
                 String user_id = session.getAttribute("uid").toString();
                 String body = request.getParameter("body");
+                        
+                String query = "INSERT INTO comments (user_id, post_id, body) VALUES(?,?,?);";
                 
-                st = conn.createStatement();
-                
-                String query = "INSERT INTO comments (user_id, post_id, body) VALUES("+user_id+","+post_id+",'"+body+"');";
-
-                st.executeUpdate(query);  
-                
+                st = conn.prepareStatement(query);
+                st.setString(1, user_id);
+                st.setString(2, post_id);
+                st.setString(3, body);
+                st.executeUpdate();
+                        
                 response.sendRedirect("comment.jsp?post_id="+post_id+"&forum_id="+forum_id);
             
             }
