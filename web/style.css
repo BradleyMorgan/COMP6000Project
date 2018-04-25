@@ -180,3 +180,7 @@ a.primary:active {
   background: gray;
   color: black;
 }
+
+.error {
+    color: red;
+}

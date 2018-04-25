@@ -28,6 +28,15 @@
     <hr />
     <h3>Choose a Subcreddit</h3>
 
+    <%
+        
+    if(request.getParameter("err") != null) {
+        
+        out.println("<p class='error'>An error occurred. Please try the operation again.</p>");
+        
+    }
+
+    %>
     <sql:setDataSource var = "creddit_db" driver = "com.mysql.jdbc.Driver" url = "jdbc:mysql://localhost/comp6000" user = "comp6000"  password = "comp6000"/>
 
     <sql:query dataSource = "${creddit_db}" var = "result">SELECT * FROM forums;</sql:query>
