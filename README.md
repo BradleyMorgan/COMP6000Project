@@ -1,5 +1,7 @@
 # COMP6000Project
 
+You will need a functioning MySQL server with admin rights to create schemas, etc.  The code assumes that it will be running on localhost.  If you need to use a server running on something other than localhost, you can modify the jdbc connections strings that are located throughout the code.  A global search and replace of jdbc:mysql://localhost/comp6000 might do the trick.
+
 I. Install with NetBeans...
 
 1. Launch NetBeans
